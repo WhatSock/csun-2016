@@ -1,0 +1,276 @@
+/*
+Visual ARIA Bookmarklet (Revision: 9/20/2015)
+Copyright 2016 Bryan Garaventa (http://whatsock.com/training/matrices/visual-aria.htm)
+Part of the ARIA Role Conformance Matrices, distributed under the terms of the Open Source Initiative OSI - MIT License
+*/
+
+*[aria-label]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] aria-label=' attr(aria-label) ' ';
+}
+*[data-ws-bm-aria-label]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] aria-label=' attr(data-ws-bm-aria-label) ' ';
+}
+*[aria-labelledby]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] aria-labelledby=' attr(aria-labelledby) ' ';
+}
+*[data-ws-bm-aria-labelledby]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] aria-labelledby=' attr(data-ws-bm-aria-labelledby) ' ';
+}
+*[aria-describedby]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] aria-describedby=' attr(aria-describedby) ' ';
+}
+*[data-ws-bm-aria-describedby]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] aria-describedby=' attr(data-ws-bm-aria-describedby) ' ';
+}
+*[aria-label][aria-describedby]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] aria-label=' attr(aria-label) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+*[data-ws-bm-aria-label][data-ws-bm-aria-describedby]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] aria-label=' attr(data-ws-bm-aria-label) ' aria-describedby=' attr(data-ws-bm-aria-describedby) ' ';
+}
+*[aria-labelledby][aria-describedby]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+*[data-ws-bm-aria-labelledby][data-ws-bm-aria-describedby]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] aria-labelledby=' attr(data-ws-bm-aria-labelledby) ' aria-describedby=' attr(data-ws-bm-aria-describedby) ' ';
+}
+*[aria-popup="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (has-menu) ';
+}
+*[data-ws-bm-aria-popup="true"]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (has-menu) ';
+}
+*[aria-haspopup="true"][aria-label]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (has-menu) aria-label=' attr(aria-label) ' ';
+}
+*[data-ws-bm-aria-haspopup="true"][data-ws-bm-aria-label]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (has-menu) aria-label=' attr(data-ws-bm-aria-label) ' ';
+}
+*[aria-haspopup="true"][aria-labelledby]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (has-menu) aria-labelledby=' attr(aria-labelledby) ' ';
+}
+*[data-ws-bm-aria-haspopup="true"][data-ws-bm-aria-labelledby]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (has-menu) aria-labelledby=' attr(data-ws-bm-aria-labelledby) ' ';
+}
+*[aria-haspopup="true"][aria-describedby]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (has-menu) aria-describedby=' attr(aria-describedby) ' ';
+}
+*[data-ws-bm-aria-haspopup="true"][data-ws-bm-aria-describedby]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (has-menu) aria-describedby=' attr(data-ws-bm-aria-describedby) ' ';
+}
+*[aria-haspopup="true"][aria-label][aria-describedby]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (has-menu) aria-label=' attr(aria-label) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+*[data-ws-bm-aria-haspopup="true"][data-ws-bm-aria-label][data-ws-bm-aria-describedby]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (has-menu) aria-label=' attr(data-ws-bm-aria-label) ' aria-describedby=' attr(data-ws-bm-aria-describedby) ' ';
+}
+*[aria-haspopup="true"][aria-labelledby][aria-describedby]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (has-menu) aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+*[data-ws-bm-aria-haspopup="true"][data-ws-bm-aria-labelledby][data-ws-bm-aria-describedby]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (has-menu) aria-labelledby=' attr(data-ws-bm-aria-labelledby) ' aria-describedby=' attr(data-ws-bm-aria-describedby) ' ';
+}
+
+*[role][aria-label]:focus:after {
+content: none;
+}
+*[data-ws-bm-role][data-ws-bm-aria-label]:before {
+content: none;
+}
+*[role][aria-labelledby]:focus:after {
+content: none;
+}
+*[data-ws-bm-role][data-ws-bm-aria-labelledby]:before {
+content: none;
+}
+*[role][aria-describedby]:focus:after {
+content: none;
+}
+*[data-ws-bm-role][data-ws-bm-aria-describedby]:before {
+content: none;
+}
+*[role][aria-haspopup]:focus:after {
+content: none;
+}
+*[data-ws-bm-role][data-ws-bm-aria-haspopup]:before {
+content: none;
+}
+
+*[aria-hidden="true"] {
+visibility: hidden;
+}
+*:focus {
+outline: 3px green inset;
+}
+
+*[aria-selected]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: #FFFFE5;
+color: red;
+font-size: .9rem; font-weight: 900;
+content: ' aria-selected is not supported on this element ';
+}
+*[data-ws-bm-aria-selected]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: #FFFFE5;
+color: red;
+font-size: .9rem; font-weight: 900;
+content: ' aria-selected is not supported on this element ';
+}
+*[role][aria-selected]:before {
+content: none;
+}
+*[data-ws-bm-role][data-ws-bm-aria-selected]:before {
+content: none;
+}
+
+span.WS-BM-Loading-Msg {
+display: none;
+}
