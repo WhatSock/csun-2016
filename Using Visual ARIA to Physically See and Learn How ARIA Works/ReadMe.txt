@@ -33,3 +33,6 @@ Moreover, when interactive widget roles are used and focus is set to one such el
 This is meant to guide education and development regarding the accompanying scripting behaviors that should be used when building interactive widgets, thus matching all of the ARIA 1.1 role usage algorithms documented at http://whatsock.com/training/matrices/ .
 
 The files within this archive may be modified and changed to try out different ARIA roles, which is an encapsulated testing environment for experimenting with ARIA role usage.
+
+Additional instructions and color combination details are available at
+http://whatsock.com/training/matrices/visual-aria.htm#instructions-for-use
