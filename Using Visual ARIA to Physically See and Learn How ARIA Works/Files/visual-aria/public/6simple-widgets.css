@@ -6,6 +6,25 @@ The Button role cannot include any embedded active elements.
 http://whatsock.com/training/matrices/#button
 */
 
+button[aria-expanded="false"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (collapsed) Button ';
+}
+button[aria-expanded="true"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (expanded) Button ';
+}
+
 *[role="button"] {
 border: ridge thick orange;
 }
@@ -2669,6 +2688,25 @@ ARIA Link
 Note: The Link role cannot include any embedded active elements.
 http://whatsock.com/training/matrices/#link
 */
+
+a[href][aria-expanded="false"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (collapsed) Link ';
+}
+a[href][aria-expanded="true"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (expanded) Link ';
+}
 
 *[role="link"] {
 border: ridge thick orange;
