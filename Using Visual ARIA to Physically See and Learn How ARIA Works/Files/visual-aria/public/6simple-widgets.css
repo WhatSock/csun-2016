@@ -6,6 +6,15 @@ The Button role cannot include any embedded active elements.
 http://whatsock.com/training/matrices/#button
 */
 
+button[aria-pressed="false"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (unpressed) Toggle Button ';
+}
 button[aria-expanded="false"]:after {
 display: table;
 height: auto; width: auto;
@@ -15,6 +24,24 @@ color: orange;
 font-size: .9rem; font-weight: 900;
 content: ' [ARIA] (collapsed) Button ';
 }
+button[aria-pressed="false"][aria-expanded="false"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (unpressed collapsed) Toggle Button ';
+}
+button[aria-pressed="true"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (pressed) Toggle Button ';
+}
 button[aria-expanded="true"]:after {
 display: table;
 height: auto; width: auto;
@@ -23,6 +50,672 @@ background-color: black;
 color: orange;
 font-size: .9rem; font-weight: 900;
 content: ' [ARIA] (expanded) Button ';
+}
+button[aria-pressed="true"][aria-expanded="true"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (pressed expanded) Toggle Button ';
+}
+button[aria-haspopup="true"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] Menu Button ';
+}
+
+button *:focus {
+border: ridge thick red;
+}
+button *:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: #FFFFE5;
+color: red;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] Button (invalid nesting, role=button cannot include embedded active elements) ';
+}
+
+button[aria-pressed="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (unpressed) Toggle Button (Space or Enter should activate) ';
+}
+button[aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (collapsed) Button (Space or Enter should activate) ';
+}
+button[aria-pressed="false"][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (unpressed collapsed) Toggle Button (Space or Enter should activate) ';
+}
+button[aria-pressed="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (pressed) Toggle Button (Space or Enter should activate) ';
+}
+button[aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (expanded) Button (Space or Enter should activate) ';
+}
+button[aria-pressed="true"][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (pressed expanded) Toggle Button (Space or Enter should activate) ';
+}
+button[aria-haspopup="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Menu Button (Space or Enter should activate, Shift+F10 should open menu if different) ';
+}
+
+button[aria-disabled="true"] {
+border: ridge thick green;
+}
+button[aria-disabled="true"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (disabled) [ARIA] Button ';
+}
+button[aria-disabled="true"][aria-pressed="false"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (disabled) [ARIA] (unpressed) Toggle Button ';
+}
+button[aria-disabled="true"][aria-expanded="false"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (disabled) [ARIA] (collapsed) Button ';
+}
+button[aria-disabled="true"][aria-pressed="false"][aria-expanded="false"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (disabled) [ARIA] (unpressed collapsed) Toggle Button ';
+}
+button[aria-disabled="true"][aria-pressed="true"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (disabled) [ARIA] (pressed) Toggle Button ';
+}
+button[aria-disabled="true"][aria-expanded="true"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (disabled) [ARIA] (expanded) Button ';
+}
+button[aria-disabled="true"][aria-pressed="true"][aria-expanded="true"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (disabled) [ARIA] (pressed expanded) Toggle Button ';
+}
+button[aria-disabled="true"][aria-haspopup="true"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (disabled) [ARIA] Menu Button ';
+}
+button[aria-disabled="true"]:focus {
+border: ridge thick orange;
+}
+button[aria-disabled="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (disabled) [ARIA] Button ';
+}
+button[aria-disabled="true"][aria-pressed="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (disabled) [ARIA] (unpressed) Toggle Button ';
+}
+button[aria-disabled="true"][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (disabled) [ARIA] (collapsed) Button ';
+}
+button[aria-disabled="true"][aria-pressed="false"][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (disabled) [ARIA] (unpressed collapsed) Toggle Button ';
+}
+button[aria-disabled="true"][aria-pressed="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (disabled) [ARIA] (pressed) Toggle Button ';
+}
+button[aria-disabled="true"][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (disabled) [ARIA] (expanded) Button ';
+}
+button[aria-disabled="true"][aria-pressed="true"][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (disabled) [ARIA] (pressed expanded) Toggle Button ';
+}
+button[aria-disabled="true"][aria-haspopup="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (disabled) [ARIA] Menu Button ';
+}
+
+button[aria-label]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Button (Space or Enter should activate) aria-label=' attr(aria-label) ' ';
+}
+button[aria-label][aria-pressed="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (unpressed) Toggle Button (Space or Enter should activate) aria-label=' attr(aria-label) ' ';
+}
+button[aria-label][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (collapsed) Button (Space or Enter should activate) aria-label=' attr(aria-label) ' ';
+}
+button[aria-label][aria-pressed="false"][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (unpressed collapsed) Toggle Button (Space or Enter should activate) aria-label=' attr(aria-label) ' ';
+}
+button[aria-label][aria-pressed="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (pressed) Toggle Button (Space or Enter should activate) aria-label=' attr(aria-label) ' ';
+}
+button[aria-label][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (expanded) Button (Space or Enter should activate) aria-label=' attr(aria-label) ' ';
+}
+button[aria-label][aria-pressed="true"][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (pressed expanded) Toggle Button (Space or Enter should activate) aria-label=' attr(aria-label) ' ';
+}
+button[aria-label][aria-haspopup="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Menu Button (Space or Enter should activate, Shift+F10 should open menu if different) aria-label=' attr(aria-label) ' ';
+}
+
+button[aria-labelledby]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Button (Space or Enter should activate) aria-labelledby=' attr(aria-labelledby) ' ';
+}
+button[aria-labelledby][aria-pressed="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (unpressed) Toggle Button (Space or Enter should activate) aria-labelledby=' attr(aria-labelledby) ' ';
+}
+button[aria-labelledby][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (collapsed) Button (Space or Enter should activate) aria-labelledby=' attr(aria-labelledby) ' ';
+}
+button[aria-labelledby][aria-pressed="false"][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (unpressed collapsed) Toggle Button (Space or Enter should activate) aria-labelledby=' attr(aria-labelledby) ' ';
+}
+button[aria-labelledby][aria-pressed="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (pressed) Toggle Button (Space or Enter should activate) aria-labelledby=' attr(aria-labelledby) ' ';
+}
+button[aria-labelledby][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (expanded) Button (Space or Enter should activate) aria-labelledby=' attr(aria-labelledby) ' ';
+}
+button[aria-labelledby][aria-pressed="true"][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (pressed expanded) Toggle Button (Space or Enter should activate) aria-labelledby=' attr(aria-labelledby) ' ';
+}
+button[aria-labelledby][aria-haspopup="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Menu Button (Space or Enter should activate, Shift+F10 should open menu if different) aria-labelledby=' attr(aria-labelledby) ' ';
+}
+
+button[aria-describedby]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Button (Space or Enter should activate) aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-pressed="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (unpressed) Toggle Button (Space or Enter should activate) aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (collapsed) Button (Space or Enter should activate) aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-pressed="false"][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (unpressed collapsed) Toggle Button (Space or Enter should activate) aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-pressed="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (pressed) Toggle Button (Space or Enter should activate) aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (expanded) Button (Space or Enter should activate) aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-pressed="true"][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (pressed expanded) Toggle Button (Space or Enter should activate) aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-haspopup="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Menu Button (Space or Enter should activate, Shift+F10 should open menu if different) aria-describedby=' attr(aria-describedby) ' ';
+}
+
+button[aria-describedby][aria-label]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Button (Space or Enter should activate) aria-label=' attr(aria-label) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-label][aria-pressed="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (unpressed) Toggle Button (Space or Enter should activate) aria-label=' attr(aria-label) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-label][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (collapsed) Button (Space or Enter should activate) aria-label=' attr(aria-label) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-label][aria-pressed="false"][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (unpressed collapsed) Toggle Button (Space or Enter should activate) aria-label=' attr(aria-label) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-label][aria-pressed="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (pressed) Toggle Button (Space or Enter should activate) aria-label=' attr(aria-label) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-label][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (expanded) Button (Space or Enter should activate) aria-label=' attr(aria-label) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-label][aria-pressed="true"][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (pressed expanded) Toggle Button (Space or Enter should activate) aria-label=' attr(aria-label) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-label][aria-haspopup="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Menu Button (Space or Enter should activate, Shift+F10 should open menu if different) aria-label=' attr(aria-label) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+
+button[aria-describedby][aria-labelledby]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Button (Space or Enter should activate) aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-labelledby][aria-pressed="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (unpressed) Toggle Button (Space or Enter should activate) aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-labelledby][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (collapsed) Button (Space or Enter should activate) aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-labelledby][aria-pressed="false"][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (unpressed collapsed) Toggle Button (Space or Enter should activate) aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-labelledby][aria-pressed="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (pressed) Toggle Button (Space or Enter should activate) aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-labelledby][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (expanded) Button (Space or Enter should activate) aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-labelledby][aria-pressed="true"][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (pressed expanded) Toggle Button (Space or Enter should activate) aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+button[aria-describedby][aria-labelledby][aria-haspopup="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Menu Button (Space or Enter should activate, Shift+F10 should open menu if different) aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
 }
 
 *[role="button"] {
@@ -2706,6 +3399,539 @@ background-color: black;
 color: orange;
 font-size: .9rem; font-weight: 900;
 content: ' [ARIA] (expanded) Link ';
+}
+
+a[href] *:focus {
+border: ridge thick red;
+}
+a[href] *:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: #FFFFE5;
+color: red;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] Link (invalid nesting, role=link cannot include embedded active elements) ';
+}
+
+a[href][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (collapsed) Link (Enter should activate) ';
+}
+a[href][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (expanded) Link (Enter should activate) ';
+}
+
+a[href][aria-disabled="true"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (disabled) [ARIA] Link ';
+}
+a[href][aria-disabled="true"][aria-expanded="false"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (disabled) [ARIA] (collapsed) Link ';
+}
+a[href][aria-disabled="true"][aria-expanded="true"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (disabled) [ARIA] (expanded) Link ';
+}
+a[href][aria-disabled="true"]:focus {
+border: ridge thick orange;
+}
+a[href][aria-disabled="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (disabled) [ARIA] Link ';
+}
+a[href][aria-disabled="true"][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (disabled) [ARIA] (collapsed) Link ';
+}
+a[href][aria-disabled="true"][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (disabled) [ARIA] (expanded) Link ';
+}
+
+a[href][aria-haspopup="true"] {
+border: ridge thick orange;
+}
+a[href][aria-haspopup="true"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' (has-menu) [ARIA] Link ';
+}
+a[href][aria-haspopup="true"][aria-expanded="false"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' (has-menu) [ARIA] (collapsed) Link ';
+}
+a[href][aria-haspopup="true"][aria-expanded="true"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' (has-menu) [ARIA] (expanded) Link ';
+}
+a[href][aria-haspopup="true"]:focus {
+border: ridge thick green;
+}
+a[href][aria-haspopup="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] Link (Enter should activate, Shift+F10 should open menu if different) ';
+}
+a[href][aria-haspopup="true"][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] (collapsed) Link (Enter should activate, Shift+F10 should open menu if different) ';
+}
+a[href][aria-haspopup="true"][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] (expanded) Link (Enter should activate, Shift+F10 should open menu if different) ';
+}
+
+a[href][aria-haspopup="true"][aria-disabled="true"] {
+border: ridge thick green;
+}
+a[href][aria-haspopup="true"][aria-disabled="true"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (disabled) (has-menu) [ARIA] Link ';
+}
+a[href][aria-haspopup="true"][aria-disabled="true"][aria-expanded="false"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (disabled) (has-menu) [ARIA] (collapsed) Link ';
+}
+a[href][aria-haspopup="true"][aria-disabled="true"][aria-expanded="true"]:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (disabled) (has-menu) [ARIA] (expanded) Link ';
+}
+a[href][aria-haspopup="true"][aria-disabled="true"]:focus {
+border: ridge thick orange;
+}
+a[href][aria-haspopup="true"][aria-disabled="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (disabled) (has-menu) [ARIA] Link ';
+}
+a[href][aria-haspopup="true"][aria-disabled="true"][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (disabled) (has-menu) [ARIA] (collapsed) Link ';
+}
+a[href][aria-haspopup="true"][aria-disabled="true"][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (disabled) (has-menu) [ARIA] (expanded) Link ';
+}
+
+a[href][aria-label]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Link (Enter should activate) aria-label=' attr(aria-label) ' ';
+}
+a[href][aria-label][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (collapsed) Link (Enter should activate) aria-label=' attr(aria-label) ' ';
+}
+a[href][aria-label][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (expanded) Link (Enter should activate) aria-label=' attr(aria-label) ' ';
+}
+
+a[href][aria-label][aria-haspopup="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] Link (Enter should activate, Shift+F10 should open menu if different) aria-label=' attr(aria-label) ' ';
+}
+a[href][aria-label][aria-haspopup="true"][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] (collapsed) Link (Enter should activate, Shift+F10 should open menu if different) aria-label=' attr(aria-label) ' ';
+}
+a[href][aria-label][aria-haspopup="true"][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] (expanded) Link (Enter should activate, Shift+F10 should open menu if different) aria-label=' attr(aria-label) ' ';
+}
+
+a[href][aria-labelledby]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Link (Enter should activate) aria-labelledby=' attr(aria-labelledby) ' ';
+}
+a[href][aria-labelledby][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (collapsed) Link (Enter should activate) aria-labelledby=' attr(aria-labelledby) ' ';
+}
+a[href][aria-labelledby][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (expanded) Link (Enter should activate) aria-labelledby=' attr(aria-labelledby) ' ';
+}
+
+a[href][aria-labelledby][aria-haspopup="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] Link (Enter should activate, Shift+F10 should open menu if different) aria-labelledby=' attr(aria-labelledby) ' ';
+}
+a[href][aria-labelledby][aria-haspopup="true"][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] (collapsed) Link (Enter should activate, Shift+F10 should open menu if different) aria-labelledby=' attr(aria-labelledby) ' ';
+}
+a[href][aria-labelledby][aria-haspopup="true"][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] (expanded) Link (Enter should activate, Shift+F10 should open menu if different) aria-labelledby=' attr(aria-labelledby) ' ';
+}
+
+a[href][aria-describedby]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Link (Enter should activate) aria-describedby=' attr(aria-describedby) ' ';
+}
+a[href][aria-describedby][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (collapsed) Link (Enter should activate) aria-describedby=' attr(aria-describedby) ' ';
+}
+a[href][aria-describedby][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (expanded) Link (Enter should activate) aria-describedby=' attr(aria-describedby) ' ';
+}
+
+a[href][aria-describedby][aria-haspopup="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] Link (Enter should activate, Shift+F10 should open menu if different) aria-describedby=' attr(aria-describedby) ' ';
+}
+a[href][aria-describedby][aria-haspopup="true"][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] (collapsed) Link (Enter should activate, Shift+F10 should open menu if different) aria-describedby=' attr(aria-describedby) ' ';
+}
+a[href][aria-describedby][aria-haspopup="true"][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] (expanded) Link (Enter should activate, Shift+F10 should open menu if different) aria-describedby=' attr(aria-describedby) ' ';
+}
+
+a[href][aria-describedby][aria-label]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Link (Enter should activate) aria-label=' attr(aria-label) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+a[href][aria-describedby][aria-label][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (collapsed) Link (Enter should activate) aria-label=' attr(aria-label) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+a[href][aria-describedby][aria-label][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (expanded) Link (Enter should activate) aria-label=' attr(aria-label) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+
+a[href][aria-describedby][aria-label][aria-haspopup="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] Link (Enter should activate, Shift+F10 should open menu if different) aria-label=' attr(aria-label) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+a[href][aria-describedby][aria-label][aria-haspopup="true"][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] (collapsed) Link (Enter should activate, Shift+F10 should open menu if different) aria-label=' attr(aria-label) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+a[href][aria-describedby][aria-label][aria-haspopup="true"][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] (expanded) Link (Enter should activate, Shift+F10 should open menu if different) aria-label=' attr(aria-label) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+
+a[href][aria-describedby][aria-labelledby]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Link (Enter should activate) aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+a[href][aria-describedby][aria-labelledby][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (collapsed) Link (Enter should activate) aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+a[href][aria-describedby][aria-labelledby][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] (expanded) Link (Enter should activate) aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+
+a[href][aria-describedby][aria-labelledby][aria-haspopup="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] Link (Enter should activate, Shift+F10 should open menu if different) aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+a[href][aria-describedby][aria-labelledby][aria-haspopup="true"][aria-expanded="false"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] (collapsed) Link (Enter should activate, Shift+F10 should open menu if different) aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
+}
+a[href][aria-describedby][aria-labelledby][aria-haspopup="true"][aria-expanded="true"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) (has-menu) [ARIA] (expanded) Link (Enter should activate, Shift+F10 should open menu if different) aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
 }
 
 *[role="link"] {
