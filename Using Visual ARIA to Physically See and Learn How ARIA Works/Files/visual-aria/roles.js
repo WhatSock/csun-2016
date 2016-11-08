@@ -1,5 +1,5 @@
 /*!
-Visual ARIA Bookmarklet (06/11/2016)
+Visual ARIA Bookmarklet (11/07/2016)
 Copyright 2016 Bryan Garaventa (http://whatsock.com/training/matrices/visual-aria.htm)
 Part of the ARIA Role Conformance Matrices, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
@@ -24,6 +24,14 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 	}
 
 	var WSBMInit = function(isTop, useOffline, basePath, msInterval, document, attrs, isNested, check, loaded){
+
+		var trim = function(str){
+			if (typeof str !== 'string')
+				return '';
+
+			return str.replace(/^\s+|\s+$/g, '');
+		}, activeObj = null, activeDObj = null;
+
 		attrs
 			= 'aria-disabled,aria-readonly,aria-haspopup,aria-orientation,aria-label,aria-labelledby,aria-describedby,aria-pressed,aria-checked,aria-valuemin,aria-valuemax,aria-valuenow,aria-valuetext,aria-controls,aria-autocomplete,aria-expanded,aria-owns,aria-activedescendant,aria-posinset,aria-setsize,aria-level,role'.split(
 				',');
@@ -38,7 +46,7 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 			return 'false';
 		};
 
-		check = function(nodes, obj, frames, focused, pNode, focusHidden){
+		check = function(nodes, obj, frames, focused, pNode, focusHidden, isSelfRef, isDefTerm){
 			if (loaded && loaded.init){
 				if (!loaded.comboboxListbox && !document.getElementById('ws-visual-aria-7')
 					&& document.querySelectorAll('*[role="combobox"], *[role="listbox"], *[role="option"]').length){
@@ -99,8 +107,43 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 			}
 
 			nodes = document.querySelectorAll(
-				'input, img[role], img[aria-label], img[aria-labelledby], img[aria-describedby], img[aria-haspopup="true"], img[aria-selected], progress');
+				'input, *[role], img[aria-label], img[aria-labelledby], img[aria-describedby], img[aria-haspopup="true"], img[aria-selected], progress');
+
 			obj = {};
+
+			isSelfRef = function(node, role, ids){
+				if (!node || node.nodeType !== 1
+					|| !trim(role)
+						|| !trim(ids)
+							|| ' application banner complementary contentinfo form main navigation region search article directory document list note table toolbar feed log status combobox grid listbox menu menubar radiogroup tablist tabpanel tree group treegrid '.indexOf(
+								' ' + role + ' ') === -1)
+					return false;
+
+				var isF = false, a = ids.split(' ');
+
+				for (var i = 0; i < a.length; i++){
+					if (document.getElementById(a[i]) == node)
+						isF = true;
+				}
+
+				if (isF)
+					node.setAttribute('data-ws-bm-self-ref', 'true');
+				return isF;
+			};
+
+			isDefTerm = function(ids){
+				var isT = true, a = ids.split(' ');
+
+				for (var i = 0; i < a.length; i++){
+					var o = document.getElementById(a[i]);
+
+					if (o && o.nodeType === 1 && o.getAttribute('role') != 'term'){
+						o.setAttribute('data-ws-bm-dtr-missing', 'true');
+						isT = false;
+					}
+				}
+				return isT;
+			};
 
 			for (var i = 0; i < nodes.length; i++){
 				for (var j = 0; j < attrs.length; j++)
@@ -118,18 +161,26 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 				else if (obj.role == 'treeitem')
 					obj['role-nested'] = isNested(nodes[i], 'tree');
 
-				if (pNode != nodes[i].parentNode){
-					pNode = nodes[i].parentNode;
+				isSelfRef(nodes[i], obj.role, obj['aria-labelledby']);
 
-					for (var a in obj){
-						if (obj[a] || !isNaN(parseInt(obj[a])))
-							pNode.setAttribute('data-ws-bm-' + a, obj[a]);
+				if (obj.role == 'definition' && obj['aria-labelledby'])
+					isDefTerm(obj['aria-labelledby']);
 
-						else
-							pNode.removeAttribute('data-ws-bm-' + a);
+				if (' input img progress '.indexOf(' ' + obj['node-name'] + ' ') !== -1){
+					if (pNode != nodes[i].parentNode){
+						pNode = nodes[i].parentNode;
+
+						for (var a in obj){
+							if (obj[a] || !isNaN(parseInt(obj[a])))
+								pNode.setAttribute('data-ws-bm-' + a, obj[a]);
+
+							else
+								pNode.removeAttribute('data-ws-bm-' + a);
+						}
 					}
 				}
 			}
+
 			focused = document.querySelectorAll('*[aria-describedby]:focus');
 
 			if (focused.length){
@@ -141,6 +192,35 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 					if (t && t.nodeType === 1)
 						t.setAttribute('data-ws-bm-db-match', dbs[d]);
 				}
+			}
+
+			focused = document.querySelectorAll('*[aria-activedescendant]:focus');
+			var fO = null;
+
+			if (focused.length)
+				fO = document.getElementById(focused[0].getAttribute('aria-activedescendant'));
+
+			if ((!focused.length || !fO || focused[0] != activeObj || fO != activeDObj)
+				&& (activeDObj && activeDObj.nodeType === 1 && activeDObj.getAttribute('data-ws-bm-ad-match'))){
+				activeDObj.removeAttribute('data-ws-bm-ad-match');
+				activeDObj.removeAttribute('data-ws-bm-ad-invalid');
+				activeDObj = null;
+			}
+
+			if (fO && fO.nodeType === 1){
+				activeObj = focused[0];
+				activeDObj = fO;
+				var nn = fO.nodeName.toLowerCase(), href = fO.getAttribute('href'), rl = fO.getAttribute('role');
+
+				if (!rl && nn == 'a' && href)
+					rl = 'link';
+
+				else if (!rl && nn == 'button')
+					rl = 'button';
+				fO.setAttribute('data-ws-bm-ad-match', rl);
+
+				if (!rl)
+					fO.setAttribute('data-ws-bm-ad-invalid', 'true');
 			}
 
 			focusHidden = document.querySelectorAll('*[hidefocus="true"]');
@@ -169,14 +249,10 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 				if (!node || node.nodeType !== 1)
 					return;
 
-				var trim = function(str){
-					if (typeof str !== 'string')
-						return '';
-
-					return str.replace(/^\s+|\s+$/g, '');
-				}, walkDOM = function(node, fn, refObj){
+				var walkDOM = function(node, fn, refObj){
 					if (!node)
 						return;
+
 					fn(node, refObj);
 					node = node.firstChild;
 

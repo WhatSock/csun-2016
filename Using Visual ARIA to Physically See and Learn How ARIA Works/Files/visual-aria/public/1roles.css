@@ -1,5 +1,5 @@
 /*
-Visual ARIA Bookmarklet (Revision: 10/05/2016)
+Visual ARIA Bookmarklet (Revision: 11/07/2016)
 Copyright 2016 Bryan Garaventa (http://whatsock.com/training/matrices/visual-aria.htm)
 Part of the ARIA Role Conformance Matrices, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
@@ -99,7 +99,8 @@ color: green;
 font-size: .9rem; font-weight: 900;
 content: ' [ARIA] aria-labelledby=' attr(data-ws-bm-aria-labelledby) ' aria-describedby=' attr(data-ws-bm-aria-describedby) ' ';
 }
-*[aria-popup="true"]:focus:after {
+
+*[aria-haspopup="true"]:focus:after, *[aria-haspopup="menu"]:focus:after, *[data-ws-bm-aria-haspopup="true"]:before, *[data-ws-bm-aria-haspopup="menu"]:before {
 display: table;
 height: auto; width: auto;
 position: relative; padding: 1px 0;
@@ -107,136 +108,46 @@ z-index: 10000;
 background-color: white;
 color: green;
 font-size: .9rem; font-weight: 900;
-content: ' [ARIA] (has-menu) ';
-}
-*[data-ws-bm-aria-popup="true"]:before {
-display: table;
-height: auto; width: auto;
-position: relative; padding: 1px 0;
-background-color: white;
-color: green;
-font-size: .9rem; font-weight: 900;
-content: ' [ARIA] (has-menu) ';
-}
-*[aria-haspopup="true"][aria-label]:focus:after {
-display: table;
-height: auto; width: auto;
-position: relative; padding: 1px 0;
-z-index: 10000;
-background-color: white;
-color: green;
-font-size: .9rem; font-weight: 900;
-content: ' [ARIA] (has-menu) aria-label=' attr(aria-label) ' ';
-}
-*[data-ws-bm-aria-haspopup="true"][data-ws-bm-aria-label]:before {
-display: table;
-height: auto; width: auto;
-position: relative; padding: 1px 0;
-background-color: white;
-color: green;
-font-size: .9rem; font-weight: 900;
-content: ' [ARIA] (has-menu) aria-label=' attr(data-ws-bm-aria-label) ' ';
-}
-*[aria-haspopup="true"][aria-labelledby]:focus:after {
-display: table;
-height: auto; width: auto;
-position: relative; padding: 1px 0;
-z-index: 10000;
-background-color: white;
-color: green;
-font-size: .9rem; font-weight: 900;
-content: ' [ARIA] (has-menu) aria-labelledby=' attr(aria-labelledby) ' ';
-}
-*[data-ws-bm-aria-haspopup="true"][data-ws-bm-aria-labelledby]:before {
-display: table;
-height: auto; width: auto;
-position: relative; padding: 1px 0;
-background-color: white;
-color: green;
-font-size: .9rem; font-weight: 900;
-content: ' [ARIA] (has-menu) aria-labelledby=' attr(data-ws-bm-aria-labelledby) ' ';
-}
-*[aria-haspopup="true"][aria-describedby]:focus:after {
-display: table;
-height: auto; width: auto;
-position: relative; padding: 1px 0;
-z-index: 10000;
-background-color: white;
-color: green;
-font-size: .9rem; font-weight: 900;
-content: ' [ARIA] (has-menu) aria-describedby=' attr(aria-describedby) ' ';
-}
-*[data-ws-bm-aria-haspopup="true"][data-ws-bm-aria-describedby]:before {
-display: table;
-height: auto; width: auto;
-position: relative; padding: 1px 0;
-background-color: white;
-color: green;
-font-size: .9rem; font-weight: 900;
-content: ' [ARIA] (has-menu) aria-describedby=' attr(data-ws-bm-aria-describedby) ' ';
-}
-*[aria-haspopup="true"][aria-label][aria-describedby]:focus:after {
-display: table;
-height: auto; width: auto;
-position: relative; padding: 1px 0;
-z-index: 10000;
-background-color: white;
-color: green;
-font-size: .9rem; font-weight: 900;
-content: ' [ARIA] (has-menu) aria-label=' attr(aria-label) ' aria-describedby=' attr(aria-describedby) ' ';
-}
-*[data-ws-bm-aria-haspopup="true"][data-ws-bm-aria-label][data-ws-bm-aria-describedby]:before {
-display: table;
-height: auto; width: auto;
-position: relative; padding: 1px 0;
-background-color: white;
-color: green;
-font-size: .9rem; font-weight: 900;
-content: ' [ARIA] (has-menu) aria-label=' attr(data-ws-bm-aria-label) ' aria-describedby=' attr(data-ws-bm-aria-describedby) ' ';
-}
-*[aria-haspopup="true"][aria-labelledby][aria-describedby]:focus:after {
-display: table;
-height: auto; width: auto;
-position: relative; padding: 1px 0;
-z-index: 10000;
-background-color: white;
-color: green;
-font-size: .9rem; font-weight: 900;
-content: ' [ARIA] (has-menu) aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
-}
-*[data-ws-bm-aria-haspopup="true"][data-ws-bm-aria-labelledby][data-ws-bm-aria-describedby]:before {
-display: table;
-height: auto; width: auto;
-position: relative; padding: 1px 0;
-background-color: white;
-color: green;
-font-size: .9rem; font-weight: 900;
-content: ' [ARIA] (has-menu) aria-labelledby=' attr(data-ws-bm-aria-labelledby) ' aria-describedby=' attr(data-ws-bm-aria-describedby) ' ';
+content: ' [ARIA] (has-menu) (Shift+F10 should open menu) ';
 }
 
-*[role][aria-label]:focus:after {
+*[aria-haspopup="listbox"]:focus:after, *[aria-haspopup="tree"]:focus:after, *[aria-haspopup="grid"]:focus:after, *[aria-haspopup="dialog"]:focus:after {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (has-popup) (' attr(aria-haspopup) ') ';
+}
+
+*[data-ws-bm-aria-haspopup="listbox"]:before, *[data-ws-bm-aria-haspopup="tree"]:before, *[data-ws-bm-aria-haspopup="grid"]:before, *[data-ws-bm-aria-haspopup="dialog"]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] (has-popup) (' attr(data-ws-bm-aria-haspopup) ') ';
+}
+
+*[role]:focus:after {
 content: none;
 }
-*[data-ws-bm-role][data-ws-bm-aria-label]:before {
+*[data-ws-bm-role]:before {
 content: none;
 }
-*[role][aria-labelledby]:focus:after {
-content: none;
-}
-*[data-ws-bm-role][data-ws-bm-aria-labelledby]:before {
-content: none;
-}
-*[role][aria-describedby]:focus:after {
-content: none;
-}
-*[data-ws-bm-role][data-ws-bm-aria-describedby]:before {
-content: none;
-}
-*[role][aria-haspopup]:focus:after {
-content: none;
-}
-*[data-ws-bm-role][data-ws-bm-aria-haspopup]:before {
-content: none;
+
+*[aria-current="true"]:before, *[aria-current="page"]:before, *[aria-current="step"]:before, *[aria-current="location"]:before, *[aria-current="date"]:before, *[aria-current="time"]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] Current (' attr(aria-current) ') ';
 }
 
 *[aria-hidden="true"] {

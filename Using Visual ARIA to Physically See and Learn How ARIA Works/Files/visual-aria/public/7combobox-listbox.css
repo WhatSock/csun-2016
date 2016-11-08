@@ -9757,3 +9757,50 @@ color: orange;
 font-size: .9rem; font-weight: 900;
 content: ' (focused) (disabled) (has-menu) (multiselectable) [ARIA] Listbox aria-activedescendant=' attr(aria-activedescendant) ' must reference child role=option element aria-labelledby=' attr(aria-labelledby) ' aria-describedby=' attr(aria-describedby) ' ';
 }
+
+*[data-ws-bm-ad-match] {
+outline: 3px green inset;
+background-color: #FFFFE5;
+color: #000;
+}
+
+*[data-ws-bm-ad-match]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+z-index: 10000;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] role=' attr(data-ws-bm-ad-match) ' ';
+}
+
+*[data-ws-bm-ad-invalid="true"]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: #FFFFE5;
+color: red;
+font-size: .9rem; font-weight: 900;
+content: ' Element referenced by aria-activedescendant has no valid role ';
+}
+
+*[role][data-ws-bm-self-ref="true"]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: #FFFFE5;
+color: red;
+font-size: .9rem; font-weight: 900;
+content: ' role=' attr(role) ' must not include aria-labelledby to reference itself ';
+}
+
+*[data-ws-bm-dtr-missing="true"]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: #FFFFE5;
+color: red;
+font-size: .9rem; font-weight: 900;
+content: ' Element must include role=term if referenced by role=definition using aria-labelledby ';
+}

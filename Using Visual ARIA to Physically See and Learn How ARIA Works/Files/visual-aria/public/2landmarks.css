@@ -179,6 +179,24 @@ color: purple;
 font-size: .9rem; font-weight: 900;
 content: ' (landmark) [ARIA] Form aria-labelledby=' attr(aria-labelledby) ' ';
 }
+form[aria-label]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: purple;
+font-size: .9rem; font-weight: 900;
+content: ' (landmark) [ARIA] Form aria-label=' attr(aria-label) ' ';
+}
+form[aria-labelledby]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: purple;
+font-size: .9rem; font-weight: 900;
+content: ' (landmark) [ARIA] Form aria-labelledby=' attr(aria-labelledby) ' ';
+}
 
 /*
 ARIA Main

@@ -37,7 +37,7 @@ content: ' [ARIA] Article aria-labelledby=' attr(aria-labelledby) ' ';
 
 /*
 ARIA Definition
-Required attributes: aria-labelledby
+Required attributes: aria-labelledby which must point to an element with role=term
 http://whatsock.com/training/matrices/#definition
 */
 
@@ -163,6 +163,120 @@ background-color: white;
 color: blue;
 font-size: .9rem; font-weight: 900;
 content: ' [ARIA] Document aria-labelledby=' attr(aria-labelledby) ' ';
+}
+
+/*
+ARIA Feed
+Note: Requires first level children with role="article".
+Elements with role="article" should be focusable and navigable using the arrow keys, and newly rendered articles must be either appended or prepended to the role="feed" container.
+The container with role="feed" should not be focusable.
+http://whatsock.com/training/matrices/#feed
+*/
+
+*[role="feed"] *[role="article"] {
+border: ridge thick blue;
+}
+*[role="feed"] *[role="article"]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: blue;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] Article (contained within role=feed) ';
+}
+
+*[role="feed"] *[role="article"]:focus {
+border: ridge thick green;
+}
+*[role="feed"] *[role="article"]:focus:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: blue;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Article (contained within role=feed) (arrows should move focus between articles) ';
+}
+
+*[role="feed"] {
+border: ridge thick blue;
+}
+*[role="feed"]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: blue;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] Feed (requires first level focusable children with role=article) ';
+}
+*[role="feed"][aria-label]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: blue;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] Feed (requires first level focusable children with role=article) aria-label=' attr(aria-label) ' ';
+}
+*[role="feed"][aria-labelledby]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: blue;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] Feed (requires first level focusable children with role=article) aria-labelledby=' attr(aria-labelledby) ' ';
+}
+
+*[role="feed"]:focus {
+border: ridge thick red;
+}
+*[role="feed"]:focus:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: #FFFFE5;
+color: red;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] Feed (role=feed should not be focusable) ';
+}
+
+/*
+ARIA Figure
+http://whatsock.com/training/matrices/#figure
+*/
+
+*[role="figure"] {
+border: ridge thick blue;
+}
+*[role="figure"]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: blue;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] Figure ';
+}
+*[role="figure"][aria-label]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: blue;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] Figure aria-label=' attr(aria-label) ' ';
+}
+*[role="figure"][aria-labelledby]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: blue;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] Figure aria-labelledby=' attr(aria-labelledby) ' ';
 }
 
 /*
@@ -379,6 +493,26 @@ background-color: white;
 color: blue;
 font-size: .9rem; font-weight: 900;
 content: ' (vertical) [ARIA] Separator ';
+}
+
+/*
+ARIA Term
+Must be referenced by role=definition using aria-labelledby
+Element with role="term" must not be a focusable active element
+http://whatsock.com/training/matrices/#term
+*/
+
+*[role="term"] {
+border: ridge thick blue;
+}
+*[role="term"]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: blue;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] Term ';
 }
 
 /*
