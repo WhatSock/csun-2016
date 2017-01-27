@@ -580,7 +580,7 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 
 	setTimeout(function(){
 		WSBMInit(true, useOffline, basePath, msInterval, document);
-	}, 2000);
+	}, 3000);
 
 	if (!document.getElementById('ws-bm-aria-matrices-lnk')){
 		var m = document.createElement('span');
