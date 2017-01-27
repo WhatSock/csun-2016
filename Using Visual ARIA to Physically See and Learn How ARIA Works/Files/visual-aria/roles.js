@@ -1,6 +1,6 @@
 /*!
-Visual ARIA Bookmarklet (11/07/2016)
-Copyright 2016 Bryan Garaventa (http://whatsock.com/training/matrices/visual-aria.htm)
+Visual ARIA Bookmarklet (01/26/2017)
+Copyright 2017 Bryan Garaventa (http://whatsock.com/training/matrices/visual-aria.htm)
 Part of the ARIA Role Conformance Matrices, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
 
@@ -19,13 +19,29 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 		var s = document.createElement('span');
 		s.className = 'WS-BM-Loading-Msg';
 		s.innerHTML
-			= '<span role="alert" style="position: fixed; z-index:10000; color: white; background-color: black; border: inset thick gray; top: 40%; left: 35%; padding: 20px; font-size: 18pt;">Loading Visual ARIA, please wait.</span>';
+			= '<span role="alert" style="position: fixed; z-index:10000; color: white; background-color: black; border: inset thick gray; top: 40%; left: 35%; padding: 20px; font-size: 18pt;">Loading Visual ARIA, please wait.<br /><i>(Hold down Ctrl+Shift then Left-click any role for more details.)</i></span>';
 		document.body.appendChild(s);
 	}
 
 	var WSBMInit = function(isTop, useOffline, basePath, msInterval, document, attrs, isNested, check, loaded){
 
-		var trim = function(str){
+		var bind = function(obj, type, fn){
+			if (obj.attachEvent){
+				obj['e' + type + fn] = fn;
+
+				obj[type + fn] = function(){
+					obj['e' + type + fn](window.event);
+				};
+
+				obj.attachEvent('on' + type, obj[type + fn]);
+			}
+
+			else if (obj.addEventListener){
+				obj.addEventListener(type, fn, false);
+			}
+
+			return obj;
+		}, trim = function(str){
 			if (typeof str !== 'string')
 				return '';
 
@@ -33,7 +49,7 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 		}, activeObj = null, activeDObj = null;
 
 		attrs
-			= 'aria-disabled,aria-readonly,aria-haspopup,aria-orientation,aria-label,aria-labelledby,aria-describedby,aria-pressed,aria-checked,aria-valuemin,aria-valuemax,aria-valuenow,aria-valuetext,aria-controls,aria-autocomplete,aria-expanded,aria-owns,aria-activedescendant,aria-posinset,aria-setsize,aria-level,role'.split(
+			= 'aria-disabled,aria-readonly,aria-haspopup,aria-orientation,aria-label,aria-labelledby,aria-describedby,aria-pressed,aria-checked,aria-valuemin,aria-valuemax,aria-valuenow,aria-valuetext,aria-controls,aria-autocomplete,aria-expanded,aria-owns,aria-activedescendant,aria-posinset,aria-setsize,aria-level,role,alt'.split(
 				',');
 		isNested = function(start, role){
 			while (start){
@@ -106,8 +122,7 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 				loadCSS('6simple-widgets.css', '6');
 			}
 
-			nodes = document.querySelectorAll(
-				'input, *[role], img[aria-label], img[aria-labelledby], img[aria-describedby], img[aria-haspopup="true"], img[aria-selected], progress');
+			nodes = document.querySelectorAll('input, *[role], img, progress');
 
 			obj = {};
 
@@ -249,10 +264,14 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 				if (!node || node.nodeType !== 1)
 					return;
 
-				var walkDOM = function(node, fn, refObj){
+				var trim = function(str){
+					if (typeof str !== 'string')
+						return '';
+
+					return str.replace(/^\s+|\s+$/g, '');
+				}, walkDOM = function(node, fn, refObj){
 					if (!node)
 						return;
-
 					fn(node, refObj);
 					node = node.firstChild;
 
@@ -271,6 +290,36 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 							|| (o.style && (o.style['display'] == 'none' || o.style['visibility'] == 'hidden'))))
 						return true;
 					return false;
+				}, inArray = function(search, stack){
+					for (var i = 0; i < stack.length; i++){
+						if (stack[i] === search){
+							return i;
+						}
+					}
+
+					return -1;
+				}, getCSSText = function(o, refObj){
+					if (o.nodeType !== 1 || o == refObj)
+						return false;
+					var css =
+									{
+									before: '',
+									after: ''
+									};
+
+					if ((document.defaultView && document.defaultView.getComputedStyle
+						&& (document.defaultView.getComputedStyle(o, ':before').getPropertyValue('content')
+							|| document.defaultView.getComputedStyle(o, ':after').getPropertyValue('content')))){
+						css.before = trim(document.defaultView.getComputedStyle(o, ':before').getPropertyValue('content'));
+						css.after = trim(document.defaultView.getComputedStyle(o, ':after').getPropertyValue('content'));
+
+						if (css.before == 'none')
+							css.before = '';
+
+						if (css.after == 'none')
+							css.after = '';
+					}
+					return css;
 				}, hasParentLabel = function(start, targ, noLabel, refObj){
 					if (!start || !targ || start == targ)
 						return false;
@@ -301,13 +350,24 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 				rPresentation = (rPresentation != 'presentation' && rPresentation != 'none') ? false : true;
 
 				var walk = function(obj, stop, refObj){
-					var nm = '';
+					var nm = '', nds = [], cssOP = {};
+
+					if (inArray(obj, nds) === -1){
+						nds.push(obj);
+					// Commented out to prevent Visual ARIA tooltips from appearing in the naming calculation
+					// cssOP = getCSSText(obj, null);
+					}
 
 					walkDOM(obj, function(o, refObj){
 						if (skip || !o || (o.nodeType === 1 && isHidden(o, refObj)))
 							return;
 
-						var name = '';
+						var name = '', cssO = {};
+
+						if (inArray(o.parentNode, nds) === -1){
+							nds.push(o.parentNode);
+							cssO = getCSSText(o.parentNode, refObj);
+						}
 
 						if (o.nodeType === 1){
 							var aLabelledby = o.getAttribute('aria-labelledby') || '', aLabel = o.getAttribute('aria-label') || '',
@@ -359,10 +419,24 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 							name = o.data;
 						}
 
-						if (name && !hasParentLabel(o, refObj, false, refObj)){
+						if (cssO.before)
+							name = cssO.before + ' ' + name;
+
+						if (cssO.after)
+							name += ' ' + cssO.after;
+						name = ' ' + trim(name) + ' ';
+
+						if (trim(name) && !hasParentLabel(o, refObj, false, refObj)){
 							nm += name;
 						}
 					}, refObj);
+
+					if (cssOP.before)
+						nm = cssOP.before + ' ' + nm;
+
+					if (cssOP.after)
+						nm += ' ' + cssOP.after;
+					nm = trim(nm);
 
 					return nm;
 				};
@@ -454,14 +528,64 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 		}
 
 		check();
+
+		bind(document.body, 'mousedown', function(ev){
+			if (ev.shiftKey && ev.ctrlKey){
+				var targ = null;
+
+				if (!ev)
+					ev = window.event;
+
+				if (ev.target)
+					targ = ev.target;
+
+				else if (ev.srcElement)
+					targ = ev.srcElement;
+
+				if (targ.nodeType == 3)
+					targ = targ.parentNode;
+				var getClosestRole = function(o){
+					while (o){
+						var r = o.getAttribute('role');
+
+						if (r && ' rowgroup row columnheader rowheader menuitem menuitemcheckbox menuitemradio group '.indexOf(' ' + r
+							+ ' ') === -1){
+							if (r == 'option')
+								r = 'listbox';
+
+							else if (r == 'radio')
+								r = 'radiogroup';
+
+							else if (r == 'tab' || r == 'tabpanel')
+								r = 'tablist';
+
+							else if (r == 'treeitem')
+								r = 'tree';
+							return r;
+						}
+						o = o.parentNode;
+					}
+					return null;
+				};
+				var role = getClosestRole(targ), rmo = top.document.getElementById('ws-bm-aria-matrices-lnk-a');
+
+				if (role && rmo.nodeType === 1)
+					rmo.href = 'http://whatsock.com/training/matrices/#' + role;
+
+				if (rmo.nodeType === 1)
+					rmo.click();
+			}
+		});
 	};
 
-	WSBMInit(true, useOffline, basePath, msInterval, document);
+	setTimeout(function(){
+		WSBMInit(true, useOffline, basePath, msInterval, document);
+	}, 2000);
 
 	if (!document.getElementById('ws-bm-aria-matrices-lnk')){
 		var m = document.createElement('span');
 		m.innerHTML
-			= '<span id="ws-bm-aria-matrices-lnk" style="position: fixed; top: 0; left: 0;padding: 3px; border: 1px solid #dedede; background: #f5f5f5; filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#f9f9f9\', endColorstr=\'#f0f0f0\'); background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f0f0f0)); background: -moz-linear-gradient(top,  #f9f9f9, #f0f0f0); border-color: #000; -webkit-box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb; -moz-box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb; box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;"><a style="display: inline-block; text-decoration: none; font-size: 10pt; padding: 6px 9px; border: 1px solid #dedede; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; background: #525252; filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#5e5e5e\', endColorstr=\'#434343\'); background: -webkit-gradient(linear, left top, left bottom, from(#5e5e5e), to(#434343)); background: -moz-linear-gradient(top,  #5e5e5e, #434343); border-color: #4c4c4c #313131 #1f1f1f; color: #fff; text-shadow: 0 1px 0 #2e2e2e; -webkit-box-shadow: 0 1px 1px #afafaf, inset 0 1px 0 #868686; -moz-box-shadow: 0 1px 1px #afafaf, inset 0 1px 0 #868686; box-shadow: 0 1px 1px #afafaf, inset 0 1px 0 #868686;" target="_blank" href="http://whatsock.com/training/matrices/"><span>ARIA Role Matrices</span></a></span>';
+			= '<span id="ws-bm-aria-matrices-lnk" style="position: fixed; top: 0; left: 0;padding: 3px; border: 1px solid #dedede; background: #f5f5f5; filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#f9f9f9\', endColorstr=\'#f0f0f0\'); background: -webkit-gradient(linear, left top, left bottom, from(#f9f9f9), to(#f0f0f0)); background: -moz-linear-gradient(top,  #f9f9f9, #f0f0f0); border-color: #000; -webkit-box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb; -moz-box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb; box-shadow: 0 1px 1px #eaeaea, inset 0 1px 0 #fbfbfb;"><a id="ws-bm-aria-matrices-lnk-a" style="display: inline-block; text-decoration: none; font-size: 10pt; padding: 6px 9px; border: 1px solid #dedede; -webkit-border-radius: 3px; -moz-border-radius: 3px; border-radius: 3px; background: #525252; filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr=\'#5e5e5e\', endColorstr=\'#434343\'); background: -webkit-gradient(linear, left top, left bottom, from(#5e5e5e), to(#434343)); background: -moz-linear-gradient(top,  #5e5e5e, #434343); border-color: #4c4c4c #313131 #1f1f1f; color: #fff; text-shadow: 0 1px 0 #2e2e2e; -webkit-box-shadow: 0 1px 1px #afafaf, inset 0 1px 0 #868686; -moz-box-shadow: 0 1px 1px #afafaf, inset 0 1px 0 #868686; box-shadow: 0 1px 1px #afafaf, inset 0 1px 0 #868686;" target="ws_aria_role_matrices" onmouseover="this.href=\'http://whatsock.com/training/matrices/\';" onfocus="this.href=\'http://whatsock.com/training/matrices/\';" href="http://whatsock.com/training/matrices/"><span>ARIA Role Matrices</span></a></span>';
 		document.body.appendChild(m);
 	}
 })();
