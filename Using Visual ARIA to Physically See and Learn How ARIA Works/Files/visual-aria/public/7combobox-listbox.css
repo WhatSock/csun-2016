@@ -743,7 +743,7 @@ z-index: 10000;
 background-color: #FFFFE5;
 color: red;
 font-size: .9rem; font-weight: 900;
-content: ' [ARIA] (invalid element has focus, Option cannot include embedded active elements) ';
+content: ' [ARIA] (invalid element has focus, role=option cannot include embedded active elements) ';
 }
 
 *[role="listbox"] *[role="option"]:focus {
