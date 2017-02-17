@@ -10338,3 +10338,53 @@ color: red;
 font-size: .9rem; font-weight: 900;
 content: ' role=term must not be used on a focusable active element ';
 }
+
+/*
+ARIA None or Presentation
+http://whatsock.com/training/matrices/#none
+http://whatsock.com/training/matrices/#presentation
+*/
+
+*[role="none"], *[role="presentation"] {
+border: ridge thick orange;
+}
+*[data-ws-role-none]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] role=none is nullifying element ' attr(data-ws-role-none) ' ';
+}
+*[data-ws-role-presentation]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: black;
+color: orange;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] role=presentation is nullifying element ' attr(data-ws-role-presentation) ' ';
+}
+
+*[role="none"]:focus, *[role="presentation"]:focus {
+border: ridge thick red;
+}
+*[data-ws-role-none]:focus:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: #FFFFE5;
+color: red;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] role=none is nullifying element ' attr(data-ws-role-none) ' ';
+}
+*[data-ws-role-presentation]:focus:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: #FFFFE5;
+color: red;
+font-size: .9rem; font-weight: 900;
+content: ' (focused) [ARIA] role=presentation is nullifying element ' attr(data-ws-role-presentation) ' ';
+}

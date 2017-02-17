@@ -1,5 +1,5 @@
 /*!
-Visual ARIA Bookmarklet (02/01/2017)
+Visual ARIA Bookmarklet (02/17/2017)
 Copyright 2017 Bryan Garaventa (http://whatsock.com/training/matrices/visual-aria.htm)
 Part of the ARIA Role Conformance Matrices, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
@@ -253,6 +253,19 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 					}
 				}
 				catch (e){}
+			}
+
+			var presentational = document.querySelectorAll('*[role="presentation"], *[role="none"]');
+
+			for (var p = 0; p < presentational.length; p++){
+				var pO = presentational[p], oR = pO.getAttribute('role'), oN = pO.nodeName.toUpperCase(),
+					aN = oR == 'none' ? 'data-ws-role-none' : 'data-ws-role-presentation';
+
+				if (' input textarea img progress '.indexOf(' ' + oN.toLowerCase() + ' ') !== -1)
+					pO.parentNode.setAttribute(aN, oN);
+
+				else
+					pO.setAttribute(aN, oN);
 			}
 
 			setTimeout(check, msInterval);
