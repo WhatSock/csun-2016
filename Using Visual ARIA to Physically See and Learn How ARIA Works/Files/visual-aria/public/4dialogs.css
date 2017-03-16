@@ -1,5 +1,43 @@
 
 /*
+ARIA Application
+Note: The Application region role will change the browse modality of screen readers such as JAWS and NVDA, so caution must always be used when implementing this role.
+As of ARIA 1.1, role=application is no longer mapped as a landmark.
+http://whatsock.com/training/matrices/#application
+*/
+
+*[role="application"] {
+border: ridge thick green;
+}
+*[role="application"]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' (unlabelled) [ARIA] Application (WARNING: Changes screen reader behavior, use with caution) ';
+}
+*[role="application"][aria-label]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] Application (WARNING: Changes screen reader behavior, use with caution) aria-label=' attr(aria-label) ' ';
+}
+*[role="application"][aria-labelledby]:before {
+display: table;
+height: auto; width: auto;
+position: relative; padding: 1px 0;
+background-color: white;
+color: green;
+font-size: .9rem; font-weight: 900;
+content: ' [ARIA] Application (WARNING: Changes screen reader behavior, use with caution) aria-labelledby=' attr(aria-labelledby) ' ';
+}
+
+/*
 ARIA Alertdialog
 Required attributes: aria-label or aria-labelledby, and aria-describedby
 Note: When rendered, focus must move to an active element within the Alertdialog. If modal, aria-modal="true" must be set and the forward and backward tab order must be confined to active elements within the Alertdialog container. When closed, focus must return to the triggering element if applicable.
