@@ -1,5 +1,5 @@
 /*!
-Visual ARIA Bookmarklet (06/28/2017)
+Visual ARIA Bookmarklet (06/29/2017)
 Copyright 2017 Bryan Garaventa (http://whatsock.com/training/matrices/visual-aria.htm)
 Part of the ARIA Role Conformance Matrices, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
@@ -331,7 +331,7 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 // As an override of list2, conditionally include name from content if current node is focusable, or if the current node matches list3 while the referenced parent node matches list1.
 					lst3 =
 									{
-									roles: ',term,definition,directory,list,group,note,status,table,rowgroup,row,contentinfo,',
+									roles: ',combobox,term,definition,directory,list,group,note,status,table,rowgroup,row,contentinfo,',
 									names: ',dl,ul,ol,dd,details,output,table,thead,tbody,tfoot,tr,'
 									};
 
