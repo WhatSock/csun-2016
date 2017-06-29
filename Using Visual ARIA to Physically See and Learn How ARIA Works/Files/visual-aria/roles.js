@@ -1,5 +1,5 @@
 /*!
-Visual ARIA Bookmarklet (02/17/2017)
+Visual ARIA Bookmarklet (06/28/2017)
 Copyright 2017 Bryan Garaventa (http://whatsock.com/training/matrices/visual-aria.htm)
 Part of the ARIA Role Conformance Matrices, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
@@ -286,12 +286,70 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 					if (!node)
 						return;
 					fn(node, refObj);
-					node = node.firstChild;
 
-					while (node){
-						walkDOM(node, fn, refObj);
-						node = node.nextSibling;
+					if (!isException(node, refObj)){
+						node = node.firstChild;
+
+						while (node){
+							walkDOM(node, fn, refObj);
+							node = node.nextSibling;
+						}
 					}
+				}, isException = function(o, refObj){
+					if (!refObj || !o || refObj.nodeType !== 1 || o.nodeType !== 1)
+						return false;
+					var pNode =
+									{
+									role: refObj.getAttribute('role'),
+									name: refObj.nodeName.toLowerCase()
+									}, node =
+									{
+									role: o.getAttribute('role'),
+									name: o.nodeName.toLowerCase()
+									};
+
+					node.focusable = (o.getAttribute('tabindex') || (node.name == 'a' && o.getAttribute('href'))
+						|| ('input,select,button'.indexOf(node.name) !== -1 && o.getAttribute('type') != 'hidden')) ? true : false;
+
+// Always include name from content when the referenced node matches list1, as well as when child nodes match those within list3
+					var lst1 =
+									{
+									roles:
+										',link,button,checkbox,option,radio,switch,tab,treeitem,menuitem,menuitemcheckbox,menuitemradio,cell,columnheader,rowheader,tooltip,heading,',
+									names: ',a,button,summary,input,h1,h2,h3,h4,h5,h6,menuitem,option,td,th,'
+									},
+
+					// Never include name from content when current node matches list2
+					lst2 =
+									{
+									roles:
+										',application,alert,log,marquee,status,timer,alertdialog,dialog,banner,complementary,contentinfo,form,main,navigation,region,search,term,definition,article,directory,list,document,feed,figure,group,img,math,note,table,toolbar,menu,menubar,combobox,grid,listbox,radiogroup,textbox,searchbox,spinbutton,scrollbar,slider,tablist,tabpanel,tree,treegrid,separator,rowgroup,row,',
+									names:
+										',article,aside,body,select,datalist,dd,details,optgroup,dialog,dl,ul,ol,figure,footer,form,header,hr,img,textarea,input,main,math,menu,nav,output,section,table,thead,tbody,tfoot,tr,'
+									},
+
+// As an override of list2, conditionally include name from content if current node is focusable, or if the current node matches list3 while the referenced parent node matches list1.
+					lst3 =
+									{
+									roles: ',term,definition,directory,list,group,note,status,table,rowgroup,row,contentinfo,',
+									names: ',dl,ul,ol,dd,details,output,table,thead,tbody,tfoot,tr,'
+									};
+
+					// Prevent calculating name from content if the current node matches list2
+					if (lst2.roles.indexOf(',' + node.role + ',') >= 0 || lst2.names.indexOf(',' + node.name + ',') >= 0){
+
+						// Override condition so name from content is sometimes included when the current node matches list3
+						if ((lst3.roles.indexOf(',' + node.role + ',') >= 0 || lst3.names.indexOf(',' + node.name + ',') >= 0) &&
+// Include name from content if the referenced node is the same as the current node, or if the current node is focusable, or if the referencing parent node matches those within list1
+						(refObj == o || node.focusable
+							|| (lst1.roles.indexOf(',' + pNode.role + ',') >= 0 || lst1.names.indexOf(',' + pNode.name + ',') >= 0))){
+							return false;
+						}
+
+						return true;
+					}
+
+					return false;
 				}, isHidden = function(o, refObj){
 					if (o.nodeType !== 1 || o == refObj)
 						return false;
@@ -373,7 +431,7 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 							idRefNode = obj;
 						}
 
-					// Disabled to prevent self referencing by Visual ARIA tooltips
+					// Disabled in Visual ARIA to prevent self referencing by Visual ARIA tooltips
 					// cssOP = getCSSText(obj, null);
 					}
 
