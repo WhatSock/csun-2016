@@ -1,5 +1,5 @@
 /*!
-Visual ARIA Bookmarklet (06/29/2017)
+Visual ARIA Bookmarklet (12/15/2017)
 Copyright 2017 Bryan Garaventa (http://whatsock.com/training/matrices/visual-aria.htm)
 Part of the ARIA Role Conformance Matrices, distributed under the terms of the Open Source Initiative OSI - MIT License
 */
@@ -120,6 +120,14 @@ Part of the ARIA Role Conformance Matrices, distributed under the terms of the O
 				loadCSS('5live-regions.css', '5');
 				loaded.simpleWidgets = true;
 				loadCSS('6simple-widgets.css', '6');
+			}
+
+			// BG:12/15/2017: Added logic to check for improper uses of aria-owns that break the accessibility tree
+			nodes = document.querySelectorAll('input[aria-owns], img[aria-owns]');
+
+			for (var i = 0; i < nodes.length; i++){
+				nodes[i].setAttribute('data-ws-bm-aria-owns-invalid', 'true');
+				nodes[i].parentNode.setAttribute('data-ws-bm-aria-owns-invalid', nodes[i].nodeName.toUpperCase());
 			}
 
 			nodes = document.querySelectorAll('input, *[role], img, progress');
