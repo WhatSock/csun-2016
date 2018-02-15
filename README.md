@@ -16,10 +16,5 @@ Or on Twitter at https://twitter.com/bryanegaraventa
 Related projects:
 -----
 
-AccDC - A Fast Route to Access for Web Applications: https://github.com/accdc/csun-2014
-
-The Accessibility Tree: How ARIA Works: https://github.com/accdc/csun-2015
-
-Using Visual ARIA to Physically See and Learn How ARIA Works: https://github.com/accdc/csun-2016
-
-Static vs. Interactive Widget Roles - Ensuring Proper Functionality in ARIA: https://github.com/accdc/csun-2017
+* WhatSock Organization: https://github.com/whatsock
+* Visual ARIA: https://github.com/accdc/visual-aria
