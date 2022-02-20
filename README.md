@@ -6,7 +6,7 @@ On March 23, 2016, "Using Visual ARIA to Physically See and Learn How ARIA Works
 Reference: http://www.csun.edu/cod/conference/2016/sessions/index.php/public/presentations/view/351
 
 IMPORTANT: The source code for Visual ARIA has been moved to the following location to prevent redundant duplication across projects.
-https://github.com/accdc/visual-aria
+https://github.com/whatsock/visual-aria
 
 Distributed under the terms of the Open Source Initiative OSI - MIT License.
 
@@ -17,4 +17,4 @@ Related projects:
 -----
 
 * WhatSock Organization: https://github.com/whatsock
-* Visual ARIA: https://github.com/accdc/visual-aria
+* Visual ARIA: https://github.com/whatsock/visual-aria
